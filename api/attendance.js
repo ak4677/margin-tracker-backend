@@ -2,8 +2,24 @@
 import mongoose from "mongoose";
 import Attendance from "../models/Attendance.js";
 import dotenv from "dotenv";
+import Cors from "cors";
 
 dotenv.config();
+
+const cors = Cors({
+  origin: "https://ak4677.github.io", // allow only your frontend
+  methods: ["GET", "POST"],
+});
+
+// Helper to run middleware in serverless
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) reject(result);
+      resolve(result);
+    });
+  });
+}
 
 // Connect to MongoDB
 if (!mongoose.connection.readyState) {
