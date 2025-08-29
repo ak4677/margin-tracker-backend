@@ -6,7 +6,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI);
+if (!mongoose.connection.readyState) {
+  mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+}
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
