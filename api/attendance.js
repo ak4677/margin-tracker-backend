@@ -7,7 +7,7 @@ import Cors from "cors";
 dotenv.config();
 
 const cors = Cors({
-  origin: "https://ak4677.github.io", // allow only your frontend
+  origin: "https://ak4677.github.io/margin-tracker/", // allow only your frontend
   methods: ["GET", "POST"],
 });
 
